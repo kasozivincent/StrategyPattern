@@ -4,28 +4,13 @@ namespace Calculator
 {
     public class Calculator
     {
+        private IArithmeticOperation operation;
 
-        public Calculator()
-        {
-        }
+        public Calculator(IArithmeticOperation operation)
+            => this.operation = operation;
 
-        public double Compute(double first, double second, char operation)
-        {
-            if(operation == '+')
-                return first + second;
-            else if(operation == '-')
-                return first - second;
-            else if(operation == '*')
-                return first * second;
-            else if(operation == '/')
-            {
-                if(second != 0)
-                    return first / second;
-                else
-                    throw new DivideByZeroException();
-            }
-            else
-                throw new InvalidOperationException();
-        }
+        public double Compute(double first, double second)
+            => operation.Compute(first, second);
+
     }
 }
